@@ -1,0 +1,16 @@
+---
+applications:
+- name: kafka-perftest-producer
+  instances: 1
+  docker:
+    image: liwang0513/kafka-perftest-client:latest
+  env:
+    CLIENT_ROLE: producer
+    BROKER_LIST: "35.192.35.40:9092"
+    TOPIC: hasty-ragdoll-topic
+    NUM_RECORDS: "100000"
+    RECORD_SIZE: "100"
+    THROUGHPUT: "-1"
+    PRODUCER_ACK: "1"
+    BUFFER_MEMORY: "67108864"
+    BATCH_SIZE: "8196"

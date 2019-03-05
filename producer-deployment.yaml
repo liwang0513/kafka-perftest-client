@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-perftest-producer
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: kafka-perftest-producer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kafka-perftest-producer
+    spec:
+      containers:
+      - name: kafka-perftest-producer
+        image: liwang0513/kafka-perftest-client:latest
+        imagePullPolicy: Always
+        env:
+        - name: CLIENT_ROLE
+          value: producer
+        - name: BROKER_LIST
+          value: 35.192.35.40:9092
+        - name: TOPIC
+          value: hasty-ragdoll-topic
+        - name: NUM_RECORDS
+          value: "100000"
+        - name: RECORD_SIZE
+          value: "100"
+        - name: THROUGHPUT
+          value: "-1"
+        - name: PRODUCER_ACK
+          value: "1"
+        - name: BUFFER_MEMORY
+          value: "67108864"
+        - name: BATCH_SIZE
+          value: "8196"

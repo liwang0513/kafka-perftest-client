@@ -1,0 +1,12 @@
+---
+applications:
+- name: kafka-perftest-consumer
+  instances: 1
+  docker:
+    image: liwang0513/kafka-perftest-client:latest
+  env:
+    CLIENT_ROLE: consumer
+    BROKER_LIST: "35.192.35.40:9092"
+    TOPIC: hasty-ragdoll-topic
+    THREADS: "1"
+    MESSAGES: "50000"

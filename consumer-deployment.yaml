@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-perftest-consumer
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: kafka-perftest-consumer
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kafka-perftest-consumer
+    spec:
+      containers:
+      - name: kafka-perftest-consumer
+        image: liwang0513/kafka-perftest-client:latest
+        imagePullPolicy: Always
+        env:
+        - name: CLIENT_ROLE
+          value: consumer
+        - name: BROKER_LIST
+          value: 35.192.35.40:9092
+        - name: TOPIC
+          value: hasty-ragdoll-topic
+        - name: THREADS
+          value: "1"
+        - name: MESSAGES
+          value: "50000"
